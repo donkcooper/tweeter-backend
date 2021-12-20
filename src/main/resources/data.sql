@@ -1,0 +1,3 @@
+INSERT INTO "PERSON"("ID","NAME","USERNAME") VALUES(1,'Aritra Mondal','aritram90');
+INSERT INTO "PERSON"("ID","NAME","USERNAME") VALUES(2,'Aritra','amg');
+INSERT INTO "PERSON"("ID","NAME","USERNAME") VALUES(3,'Mondal','amondal');
