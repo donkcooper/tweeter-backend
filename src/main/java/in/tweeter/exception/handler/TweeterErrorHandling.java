@@ -1,6 +1,7 @@
 package in.tweeter.exception.handler;
 
 import in.tweeter.controller.dto.ErrorResponse;
+import in.tweeter.exception.InvalidLoginException;
 import in.tweeter.exception.UsernameExistsException;
 import in.tweeter.exception.EmptyCheckException;
 import org.springframework.http.HttpStatus;
@@ -34,8 +35,8 @@ public class TweeterErrorHandling extends ResponseEntityExceptionHandler {
         return new ResponseEntity(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(UsernameExistsException.class)
-    public final ResponseEntity<ErrorResponse> handleExistingUserError(UsernameExistsException exp) {
+    @ExceptionHandler({UsernameExistsException.class, InvalidLoginException.class})
+    public final ResponseEntity<ErrorResponse> handleExistingUserError(Exception exp) {
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .message(exp.getMessage())
                 .status(HttpStatus.FORBIDDEN.value())

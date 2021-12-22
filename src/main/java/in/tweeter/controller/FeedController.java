@@ -38,7 +38,7 @@ public class FeedController {
                 .message(request.getMessage())
                 .location(request.getLocation())
                 .people(peopleService.findPeopleById(request.getPeopleId()))
-                .timestamp(Instant.now())
+                .timestamp(Instant.now().getEpochSecond())
                 .build();
         feedService.saveFeed(entity);
         return new ResponseEntity(feedService.getFeedCountByPeople(request.getPeopleId()), HttpStatus.CREATED);

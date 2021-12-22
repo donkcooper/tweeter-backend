@@ -27,5 +27,5 @@ public class FeedEntity {
     private PeopleEntity people;
     private String message;
     private String location;
-    private Instant timestamp;
+    private long timestamp;
 }
