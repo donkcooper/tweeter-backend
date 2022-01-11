@@ -5,24 +5,25 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Table;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
-import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-@Table(name = "people")
+@Table(name = "stats")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PeopleEntity {
+public class StatsEntity {
+
     @Id
     @GeneratedValue
     private long id;
-    private String name;
-
-    @Column(unique=true)
-    private String username;
+    private long likes;
+    private long shares;
+    private String location;
+    private long number;
+    private long updatedTimestamp;
 }

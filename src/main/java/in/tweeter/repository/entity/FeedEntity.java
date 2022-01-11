@@ -5,12 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.ManyToOne;
-import java.time.Instant;
+import javax.persistence.OneToOne;
 
 @Entity
 @Table(name = "feed")
@@ -25,7 +25,9 @@ public class FeedEntity {
 
     @ManyToOne
     private PeopleEntity people;
+    @OneToOne
+    private StatsEntity stats;
     private String message;
-    private String location;
     private long timestamp;
+    private String type;
 }

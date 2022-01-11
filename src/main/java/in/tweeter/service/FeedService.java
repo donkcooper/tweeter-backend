@@ -5,6 +5,7 @@ import in.tweeter.repository.entity.FeedEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -21,10 +22,16 @@ public class FeedService {
     }
 
     public List<FeedEntity> getAllFeeds() {
-        return feedRepository.findAll();
+        List<FeedEntity> feedEntities = feedRepository.findAll();
+        Collections.reverse(feedEntities);
+        return feedEntities;
     }
 
     public int getFeedCountByPeople(long id) {
         return feedRepository.findFeedByPeopleId(id).size();
+    }
+
+    public FeedEntity getFeedById(long feedId) {
+        return feedRepository.getById(feedId);
     }
 }
