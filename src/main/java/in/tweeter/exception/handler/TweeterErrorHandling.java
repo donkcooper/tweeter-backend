@@ -20,6 +20,7 @@ public class TweeterErrorHandling extends ResponseEntityExceptionHandler {
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .message(ex.getMessage())
                 .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                .traceElements(ex.getStackTrace())
                 .timestamp(Instant.now())
                 .build();
         return new ResponseEntity(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);

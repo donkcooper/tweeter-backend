@@ -13,4 +13,5 @@ public class ErrorResponse {
     private String message;
     private int status;
     private Instant timestamp;
+    private StackTraceElement[] traceElements;
 }

@@ -1,0 +1,5 @@
+2022-01-24 22:22:32 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM CONFIGURATION 
+SELECT[*] * FROM PEOPLE"; SQL statement:
+SELECT * FROM CONFIGURATION 
+select * from PEOPLE [42000-200]
