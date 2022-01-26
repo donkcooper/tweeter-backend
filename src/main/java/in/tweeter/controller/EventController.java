@@ -1,10 +1,8 @@
 package in.tweeter.controller;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import in.tweeter.controller.dto.ConfigRequest;
 import in.tweeter.controller.dto.EventProcessResponse;
-import in.tweeter.controller.dto.FeedResponse;
 import in.tweeter.repository.entity.ConfigurationEntity;
 import in.tweeter.repository.entity.FeedEntity;
 import in.tweeter.service.ConfigurationService;
@@ -34,8 +32,8 @@ public class EventController {
     }
 
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<EventProcessResponse> processEvents(@RequestParam("process") Boolean process) {
-        EventProcessResponse response = EventProcessResponse.builder().build();
+    public ResponseEntity<List<EventProcessResponse>> processEvents(@RequestParam("process") Boolean process) {
+        List<EventProcessResponse> response = new ArrayList<>();
         String feedUrl = "http://ec2-13-126-172-135.ap-south-1.compute.amazonaws.com:8080/feed";
         if (process) {
             RestTemplate restTemplate = new RestTemplate();
@@ -46,12 +44,9 @@ public class EventController {
                     .map(object -> mapper.convertValue(object, FeedEntity.class))
                     .collect(Collectors.toList());
             configService.processEvents(feedEntities);
-            response = EventProcessResponse.builder()
-                    .key("test-key")
-                    .action("test-action")
-                    .build();
+            response = configService.processEvents(feedEntities);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping(path = "/addConfig",
@@ -65,6 +60,6 @@ public class EventController {
                 .timestamp(Instant.now().getEpochSecond())
                 .build();
         configService.saveConfig(entity);
-        return new ResponseEntity(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
